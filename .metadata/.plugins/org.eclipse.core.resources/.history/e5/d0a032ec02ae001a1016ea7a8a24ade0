@@ -1,0 +1,10 @@
+package com.springboot.example.Sample.model;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "USER")
+public class User {
+
+}

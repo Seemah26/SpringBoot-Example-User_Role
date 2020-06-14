@@ -1,0 +1,2 @@
+package com.springboot.example.Sample.service;
+public interface UserService {

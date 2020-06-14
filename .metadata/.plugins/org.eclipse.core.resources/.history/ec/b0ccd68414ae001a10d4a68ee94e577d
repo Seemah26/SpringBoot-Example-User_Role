@@ -1,0 +1,3 @@
+package com.springboot.example.Sample.Repo;
+public interface RoleRepository extends JpaRepository<Role, Long>{
+}

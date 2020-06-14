@@ -1,0 +1,9 @@
+package com.springboot.example.Sample.service;
+
+import com.springboot.example.Sample.model.User;
+
+public interface UserService {
+    void save(User user);
+   void login(String email,String password);
+
+}

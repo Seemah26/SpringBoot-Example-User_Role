@@ -1,0 +1,4 @@
+package com.springboot.example.Sample.model;
+public class Login {
+	private String email;
+	private String password;

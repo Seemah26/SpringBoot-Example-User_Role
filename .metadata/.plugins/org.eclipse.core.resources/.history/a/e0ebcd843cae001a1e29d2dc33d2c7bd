@@ -1,0 +1,9 @@
+package com.springboot.example.Sample.Repo;
+
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.springboot.example.Sample.model.Role;
+
+public interface RoleRepository extends JpaRepository<Role, Long>{
+}

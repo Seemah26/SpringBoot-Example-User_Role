@@ -1,0 +1,5 @@
+package com.springboot.example.Sample.model;
+
+public enum RoleNames {
+
+}

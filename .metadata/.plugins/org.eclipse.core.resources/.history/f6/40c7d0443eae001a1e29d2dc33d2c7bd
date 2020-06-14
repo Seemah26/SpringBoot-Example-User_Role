@@ -1,0 +1,18 @@
+package com.springboot.example.Sample.Repo;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import com.springboot.example.Sample.model.User;
+
+@Repository
+public interface UserRepository extends JpaRepository<User, Long> {
+//	Optional findByEmail(String email);
+//	 boolean findByEmailAndPassword(String email,String password);
+	public List<User> findByEmailIdAndPassword(String emailId, String password);
+
+}
+

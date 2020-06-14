@@ -1,0 +1,54 @@
+package com.springboot.example.Sample.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.springboot.example.Sample.Repo.RoleRepository;
+import com.springboot.example.Sample.Repo.UserRepository;
+import com.springboot.example.Sample.model.User;
+import com.springboot.example.Sample.util.JwtToken;
+import com.springboot.example.Sample.util.PasswordEncryption;
+
+@Service
+public class UserServiceImpl implements UserService {
+	@Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private RoleRepository roleRepository;
+
+    @Override
+    public void save(User user, HttpServletRequest request) {
+    	  Optional userExist = userRepository.findByEmail(user.getEmail());  
+    	  //findByEmail(user.getEmail());
+    	 if(!userExist.isPresent())
+    	 {	
+    	user.setPassword(PasswordEncryption.PasswordEncoder(user.getPassword()));
+		String tokenGen = JwtToken.jwtTokenGenerator(user.getEmail());
+        System.out.println("token===>"+tokenGen);
+      // user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        //user.setRoles(new HashSet<>(roleRepository.findAll()));
+    	user.setRoles(user.getRoles());
+        userRepository.save(user);
+        
+    	 }
+    	 else {
+    		 System.out.println("user already exist");
+    	 }
+    }
+
+	@Override
+	public Boolean login(String email, String password) {
+		// Optional userExist = userRepository.findByEmail(email);
+		 Optional<User> userExist = userRepository.findByEmailAndPassword(email, PasswordEncryption.PasswordEncoder(password));
+		if(userExist.isPresent()) {
+			return true;
+		}
+		return false;
+	}		 
+		
+}
